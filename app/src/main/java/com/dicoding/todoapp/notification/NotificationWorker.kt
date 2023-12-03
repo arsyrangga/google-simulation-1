@@ -15,6 +15,7 @@ import com.dicoding.todoapp.R
 import com.dicoding.todoapp.data.Task
 import com.dicoding.todoapp.data.TaskRepository
 import com.dicoding.todoapp.ui.detail.DetailTaskActivity
+import com.dicoding.todoapp.utils.DateConverter
 import com.dicoding.todoapp.utils.NOTIFICATION_CHANNEL_ID
 import com.dicoding.todoapp.utils.TASK_ID
 import kotlinx.coroutines.Dispatchers
@@ -55,7 +56,7 @@ class NotificationWorker(ctx: Context, params: WorkerParameters) : Worker(ctx, p
         val notification: NotificationCompat.Builder = NotificationCompat.Builder(applicationContext, channelName.toString())
             .setSmallIcon(R.drawable.ic_notifications)
             .setContentTitle(data.title)
-            .setContentText(data.description)
+            .setContentText(DateConverter.convertMillisToString(data.dueDateMillis))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(getPendingIntent(data))
             .setDefaults(NotificationCompat.DEFAULT_ALL)

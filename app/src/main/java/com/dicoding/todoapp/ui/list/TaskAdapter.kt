@@ -1,6 +1,8 @@
 package com.dicoding.todoapp.ui.list
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,10 +36,12 @@ class TaskAdapter(
             task.isCompleted -> {
                 //DONE
                 holder.tvTitle.text = task.title
+                holder.tvTitle.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG;
                 holder.cbComplete.isChecked = true
             }
             task.dueDateMillis < System.currentTimeMillis() -> {
                 //OVERDUE
+                holder.tvTitle.setTextColor(Color.parseColor("#FFC2185B"))
                 holder.cbComplete.isChecked = false
             }
             else -> {
